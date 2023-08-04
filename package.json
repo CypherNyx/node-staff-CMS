@@ -1,0 +1,25 @@
+{
+  "name": "staff-cms",
+  "version": "1.0.0",
+  "description": "This application is a content management system that allows non-developers to easily view and interact with information stored in databases. It's a command-line application to assist managing a company's employee database, using Node.js, Inquirer, and MySQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CypherNyx/node-staff-CMS.git"
+  },
+  "author": "Dahlia Guido",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CypherNyx/node-staff-CMS/issues"
+  },
+  "homepage": "https://github.com/CypherNyx/node-staff-CMS#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "inquirer": "^8.2.6",
+    "mysql2": "^3.5.2"
+  }
+}

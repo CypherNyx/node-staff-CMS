@@ -29,6 +29,15 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 ```
 2. Open a terminal or command prompt and navigate to the cloned repository's directory.
 3. Run ```npm install``` to install the necessary dependencies.
+
+### NPM and other Dependencies: 
+ - Node.js
+ - Express.js
+ - Inquirer
+ - dotenv
+ - mysql2
+
+
 <br>
 <br>
 ## Features
