@@ -11,6 +11,7 @@
 ![Node.js](./assets/node.svg)
 ![Express.js](./assets/express.svg)
 ![MySQL](./assets/mysqul.svg)
+  
   ## Table of Contents
   * [Demo](#demo)
   * [Installation](#installation)
@@ -28,7 +29,7 @@
 git clone https://github.com/CypherNyx/node-staff-CMS.git
 ```
 2. Open a terminal or command prompt and navigate to the cloned repository's directory.
-3. Run ```npm install``` to install the necessary dependencies.
+3. Run ```npm i``` to install the necessary dependencies.
 
 ### NPM and other Dependencies: 
  - Node.js
@@ -40,6 +41,7 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 
 <br>
 <br>
+
 ## Features
 ### Navigation
 
@@ -66,15 +68,6 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 - View all employees - See a table of all employees with their id, first name, last name, job title, department, salary, and manager
 - Add an employee - Add a new employee by entering their first name, last name, role, and manager
 - Update employee role - Select an employee and update their job role
-
-### Responsive Design
-
-- Mobile-friendly, responsive UI that works on all screen sizes
-
-### Authentication
-
-- Login system to restrict access to authorized users
-- Different access levels for regular users vs admins
 
 ### Database
 
