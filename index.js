@@ -94,16 +94,39 @@ const mainMenu = async () => {
 /** VIEW All Functions */
 
 const viewDepartments = async () => {
-  console.log('Departments:')
+  console.log('View ALL Departments:');
   try {
     const results = await db.query(`SELECT * FROM department`);
     console.table(results);
     mainMenu();
-    
+
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  };
+};
+const viewRoles = async () => {
+  console.log('View ALL Roles:');
+  try {
+    const results = await db.query(`SELECT * FROM roleType`);
+    console.table(results);
+    mainMenu();
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  };
+};
+//! this one needs to be joined so that id shows the salary for each employee
+const viewEmployees = async () => {
+  console.log('View All Employees:');
+  try {
+    const results = await db.query(`SELECT * FROM employee`);
+    console.table(results);
+    mainMenu();
   } catch (err) {
     handleError(err.message);
     mainMenu();
   };
 };
 
- init();
+init();
