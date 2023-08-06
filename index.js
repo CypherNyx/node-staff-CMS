@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const db = require('./db/connection');
 const util = require('util');
 const { error } = require('console');
+const mysql = require('mysql2');
 
 
 /*
@@ -18,10 +19,16 @@ const { error } = require('console');
 // *** convert the callback-based db.query function into a promise-based function.
 db.query = util.promisify(db.query);
 
-//** Handle errors and print error message
+// *** Handle errors and print error message
 const handleError = (errorMessage) => {
   error(`An error occurred: ${errorMessage}`);
 };
+
+// *** Connect db
+db.connect( function (err) {
+  handleError(err.message);
+  mainMenu();
+});
 
 // *** Begin Inquirer prompting session: 
 const mainMenu = async () => {
