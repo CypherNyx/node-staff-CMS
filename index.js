@@ -115,7 +115,9 @@ const viewDepartments = async () => {
   };
 };
 const viewRoles = async () => {
-  console.log('View ALL Roles:');
+  console.log(`
+  **********************
+  View ALL Roles:`);
   try {
     const results = await db.query(`
       SELECT * FROM roleType
@@ -130,12 +132,19 @@ const viewRoles = async () => {
 };
 //! this one needs to be joined so that id shows the salary for each employee
 const viewEmployees = async () => {
-  console.log('View All Employees:');
+  console.log(`
+  **********************
+  View All Employees:
+  `);
   try {
     const results = await db.query(`
       SELECT * FROM employee
       JOIN roleType ON roleType.role_id = employee.role_id;
       `);
+    // const results = await db.query(`
+    //   SELECT employee.employee_id AS ID, employee.first_name AS First_Name, employee.last_name AS Last_Name, roleType.role_title AS Title, department.name AS Department, roleType.salary AS Salary, 
+    //   CONCAT(manager_id.first_name, " ", manager_id.last_name) AS Manager FROM employee      
+    //   `);
     console.table(results);
     mainMenu();
   } catch (err) {
