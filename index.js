@@ -138,13 +138,19 @@ const viewEmployees = async () => {
   `);
   try {
     const results = await db.query(`
-      SELECT * FROM employee
-      JOIN roleType ON roleType.role_id = employee.role_id;
-      `);
-    // const results = await db.query(`
-    //   SELECT employee.employee_id AS ID, employee.first_name AS First_Name, employee.last_name AS Last_Name, roleType.role_title AS Title, department.name AS Department, roleType.salary AS Salary, 
-    //   CONCAT(manager_id.first_name, " ", manager_id.last_name) AS Manager FROM employee      
-    //   `);
+    SELECT
+    e1.employee_id AS id,
+    e1.first_name AS first_name,
+    e1.last_name AS last_name,
+    roleType.role_title AS title,
+    department.department_name AS department,
+    roleType.salary AS salary,
+    CONCAT(m1.first_name, ' ', m1.last_name) AS manager_name
+  FROM employee e1
+  LEFT JOIN employee m1 ON e1.manager_id = m1.employee_id
+  JOIN roleType ON roleType.role_id = e1.role_id
+  JOIN department ON department.department_id = roleType.department_id;
+        `);
     console.table(results);
     mainMenu();
   } catch (err) {
