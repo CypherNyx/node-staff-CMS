@@ -1,7 +1,6 @@
 DELETE FROM department;
 DELETE FROM roleType;
 DELETE FROM employee;
-/*
 
 INSERT INTO department (department_id, department_name) VALUES
     (101, 'Sales'),
@@ -25,9 +24,10 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
     ('Donna', 'Emerson', 40, 2),
     ('John', 'Bosworth', 20, 1),
     ('Haley', 'Clark', 30, 2),
-    ('Ryan', 'Ray', 20, 2);*/
+    ('Ryan', 'Ray', 20, 2);
 
-    
+ /* this is the OLD code when tried Auto Increment instead of custom role and dep ID:
+
 INSERT INTO department (department_name) VALUES
     ('Sales'),
     ('Marketing'),
@@ -51,3 +51,5 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
     ('John', 'Bosworth', 2, 1),
     ('Haley', 'Clark', 3, 2),
     ('Ryan', 'Ray', 2, 2);
+    
+    */
