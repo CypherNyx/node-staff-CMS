@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const db = require('./db/connection');
 const util = require('util');
 const { error } = require('console');
-const mysql = require('mysql2');
+const consoleTable = require('console.table');
 
 
 /*
@@ -24,11 +24,19 @@ const handleError = (errorMessage) => {
   error(`An error occurred: ${errorMessage}`);
 };
 
-// *** Connect db
-db.connect( function (err) {
-  handleError(err.message);
-  mainMenu();
-});
+// *** Connect db - Function to initialize the application
+const init = async () => {
+  try {
+    // Connect to the database
+    await db.connect();
+    console.log('Connected to the database');
+
+    // Call the mainMenu function to start the application
+    await mainMenu();
+  } catch (err) {
+    handleError(err.message);
+  }
+};
 
 // *** Begin Inquirer prompting session: 
 const mainMenu = async () => {
@@ -88,14 +96,14 @@ const mainMenu = async () => {
 const viewDepartments = async () => {
   console.log('Departments:')
   try {
-    db.query('SELECT * FROM department', function (err, results) {
-      err ? console.table(err) : console.table(results);
-      mainMenu();
-    });
+    const results = await db.query(`SELECT * FROM department`);
+    console.table(results);
+    mainMenu();
+    
   } catch (err) {
     handleError(err.message);
     mainMenu();
   };
 };
 
-mainMenu();
+ init();
