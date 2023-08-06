@@ -13,10 +13,10 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the database`)
 );
-db.connect( (error) => {
-  if (error) {
-    console.error(error);
-  }
+// run init after establishing connection to db
+db.connect( function (err) {
+  if (err) throw err;
+  mainMenu();
 })
 
 module.exports = db;
