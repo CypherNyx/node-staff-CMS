@@ -4,11 +4,11 @@ CREATE DATABASE company_staff_db;
 USE company_staff_db;
 /*table begins here*/
 CREATE TABLE department (
-    department_id INT NOT NULL PRIMARY KEY,
+    department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL     
 );
 CREATE TABLE roleType (
-  role_id INT NOT NULL PRIMARY KEY,
+  role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   role_title VARCHAR(100) NOT NULL,
   salary DECIMAL(10, 2) NOT NULL,
   department_id INT, 
