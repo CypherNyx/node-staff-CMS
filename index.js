@@ -18,6 +18,11 @@ const { error } = require('console');
 // *** convert the callback-based db.query function into a promise-based function.
 db.query = util.promisify(db.query);
 
+//** Handle errors and print error message
+const handleError = (errorMessage) => {
+  error(`An error occurred: ${errorMessage}`);
+};
+
 // *** Begin Inquirer prompting session: 
 const mainMenu = async () => {
   try {
@@ -66,7 +71,7 @@ const mainMenu = async () => {
     }
 
   } catch (error) {
-    console.error(error);
+    handleError(err.message);
     mainMenu();
   }
 };
@@ -75,12 +80,15 @@ const mainMenu = async () => {
 
 const viewDepartments = async () => {
   console.log('Departments:')
-  try{
-  db.query('SELECT * FROM department', function (err, results) {
-    err ? console.error(error) : console.log(results);
-
-  });
-};
+  try {
+    db.query('SELECT * FROM department', function (err, results) {
+      err ? console.table(err) : console.table(results);
+      mainMenu();
+    });
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  };
 };
 
 mainMenu();
