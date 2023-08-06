@@ -3,8 +3,6 @@ const db = require('./db/connection');
 const util = require('util');
 const { error } = require('console');
 const consoleTable = require('console.table');
-
-
 /*
 -Connect SQL to db (done in connections.js)
 -Run Init after establishing connection to db (done in connections.js)
@@ -15,7 +13,6 @@ const consoleTable = require('console.table');
 -Write UPDATE (employee role) function
 - look up console.table NPM
 */
-
 // *** convert the callback-based db.query function into a promise-based function.
 db.query = util.promisify(db.query);
 
@@ -30,7 +27,6 @@ const init = async () => {
     // Connect to the database
     await db.connect();
     console.log('Connected to the database');
-
     // Call the mainMenu function to start the application
     await mainMenu();
   } catch (err) {
@@ -60,8 +56,6 @@ const mainMenu = async () => {
         new inquirer.Separator(),
         'EXIT APPLICATION [X]'
       ],
-
-
     });
     // Case expression for menu options (answers input)
     switch (answers.userChoice) {
@@ -90,7 +84,6 @@ const mainMenu = async () => {
         process.exit(0); // exit inquirer with code 0 (sucess)
         break;
     }
-
   } catch (error) {
     handleError(err.message);
     mainMenu();
@@ -98,7 +91,6 @@ const mainMenu = async () => {
 };
 
 /** VIEW All Functions */
-
 const viewDepartments = async () => {
   console.log(`
   **********************
@@ -130,7 +122,7 @@ const viewRoles = async () => {
     mainMenu();
   };
 };
-//! this one needs to be joined so that id shows the salary for each employee
+//! this one needs to be joined so that id shows the salary manager and department for each employee
 const viewEmployees = async () => {
   console.log(`
   **********************
@@ -157,6 +149,66 @@ const viewEmployees = async () => {
     handleError(err.message);
     mainMenu();
   };
+};
+
+/** ADD All Functions */
+const addDepartment = async () => {
+  console.log(`
+  **********************
+  Add a NEW Department:
+  `);
+  try {
+    // tell answers to wait for prompt input
+    let answers = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'newDepartment',
+        message: 'What is the name of the new department?'
+      }
+    ]);
+    let res = await db.query(`INSERT INTO department SET ?`, {
+      department_name: answers.newDepartment
+    });
+    console.log(`${answers.newDepartment} successfully added to the departments database.\n`);
+    mainMenu();
+
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  }
+
+};
+
+const addRole = async () => {
+  console.log(`
+  **********************
+  Add a NEW Role:
+  `);
+  try {
+    // tell answers to wait for prompt input
+    let answers = await inquirer.prompt({
+
+    });
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  }
+};
+
+const addEmployee = async () => {
+  console.log(`
+  **********************
+  Add a NEW Employee:
+  `);
+  try {
+    // tell answers to wait for prompt input
+    let answers = await inquirer.prompt({
+
+    });
+  } catch (err) {
+    handleError(err.message);
+    mainMenu();
+  }
 };
 
 init();
