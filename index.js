@@ -11,7 +11,6 @@ const consoleTable = require('console.table');
 -Write VIEW ALL (dep, roles, empl) functions
 -Write  ADD (dep, roles, empl) functions
 -Write UPDATE (employee role) function
-- look up console.table NPM
 */
 // *** convert the callback-based db.query function into a promise-based function.
 db.query = util.promisify(db.query);
@@ -90,6 +89,7 @@ const mainMenu = async () => {
   }
 };
 
+
 /** VIEW All Functions */
 const viewDepartments = async () => {
   console.log(`
@@ -126,8 +126,7 @@ const viewRoles = async () => {
 const viewEmployees = async () => {
   console.log(`
   **********************
-  View All Employees:
-  `);
+  View All Employees: `);
   try {
     const results = await db.query(`
     SELECT
@@ -155,8 +154,7 @@ const viewEmployees = async () => {
 const addDepartment = async () => {
   console.log(`
   **********************
-  Add a NEW Department:
-  `);
+  Add a NEW Department:`);
   try {
     // tell answers to wait for prompt input
     let answers = await inquirer.prompt([
@@ -182,8 +180,7 @@ const addDepartment = async () => {
 const addRole = async () => {
   console.log(`
   **********************
-  Add a NEW Role:
-  `);
+  Add a NEW Role:`);
   try {
     // Query all depts in db, then save it to depList
     const deptList = await db.query(`SELECT * FROM department`);
@@ -232,17 +229,66 @@ const addRole = async () => {
 const addEmployee = async () => {
   console.log(`
   **********************
-  Add a NEW Employee:
-  `);
+  Add a NEW Employee:`);
   try {
-    // tell answers to wait for prompt input
-    let answers = await inquirer.prompt({
-
+    // Query all roles then Map over roleList
+    const roleList = await db.query(`SELECT * FROM roleType`);
+    const roleChoices = roleList.map(role => {
+      return {
+        name: role.role_title,
+        value: role.role_id
+      }
     });
+
+    // Query all employees then map over to pick manager
+    const managerList = await db.query(`SELECT * FROM employee`);
+    const managerChoices = managerList.map(manager => {
+      return {
+        name: `${manager.first_name} ${manager.last_name}`,
+        value: manager.employee_id
+      }
+    });
+
+    // tell answers to wait for prompt input
+    let answers = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'newEmpName',
+        message: `What is the employee's first name?`
+      },
+      {
+        type: 'input',
+        name: 'newEmpSurname',
+        message: `What is the employee's last name?`
+      },
+      {
+        type: 'list',
+        name: 'newEmpRole',
+        choices: roleChoices
+      },
+      {
+        type: 'list',
+        name: 'newEmpManager',
+        choices: managerChoices
+      }
+    ]);
+
+    let addEmpRole = answers.newEmpRole;
+    let managerID = answers.newEmpManager;
+    let res = await db.query(`INSERT INTO employee SET ?`, {
+      first_name: answers.newEmpName,
+      last_name: answers.newEmpSurname,
+      role_id: addEmpRole,
+      manager_id: managerID
+    });
+    console.log(`Added ${answers.newEmpName} ${answers.newEmpSurname} to the database \n`);
+    mainMenu();
   } catch (err) {
     handleError(err.message);
     mainMenu();
   }
 };
 
+
 init();
+

@@ -13,10 +13,5 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the database`)
 );
-// run init after establishing connection to db
-// db.connect( function (err) {
-//   if (err) throw err;
-//   mainMenu();
-// })
 
 module.exports = db;
