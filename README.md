@@ -21,6 +21,8 @@
   * [Questions](#questions)
 
   ## Demo
+
+  ### [Click here to view the VIDEO DEMO of this Application ➡️](url)
   
   ## Installation
   
@@ -33,10 +35,10 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 
 ### NPM and other Dependencies: 
  - Node.js
- - Express.js
  - Inquirer
  - dotenv
  - mysql2
+ - console.table
 
 
 <br>
