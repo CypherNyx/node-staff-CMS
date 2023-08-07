@@ -9,7 +9,6 @@
 <br>
 ![JavaScript](./assets/js.svg)
 ![Node.js](./assets/node.svg)
-![Express.js](./assets/express.svg)
 ![MySQL](./assets/mysqul.svg)
   
   ## Table of Contents
@@ -58,7 +57,7 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
   - Add a department
   - Add a role
   - Add an employee
-  - Update employee role
+  - *Update employee role -- Coming Soon!*
 
 ### Departments
 
@@ -73,7 +72,7 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 
 - View all employees - See a table of all employees with their id, first name, last name, job title, department, salary, and manager
 - Add an employee - Add a new employee by entering their first name, last name, role, and manager
-- Update employee role - Select an employee and update their job role
+- *Coming Soon: Update employee role - Select an employee and update their job role*
 
 ### Database
 
