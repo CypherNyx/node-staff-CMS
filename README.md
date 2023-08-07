@@ -22,7 +22,11 @@
 
   ## Demo
 
-  ### [Click here to view the VIDEO DEMO of this Application ➡️](url)
+  ### [Click here to view the VIDEO DEMO of this Application ➡️](https://watch.screencastify.com/v/1twyRIM8pQusWW68iref)
+
+  ![Initial Prompts](./assets/Screenshot_prompts1.png)
+  ![prompt results](./assets/Screenshot_prompts_results.png)
+  ![view all](./assets/Screenshot%20view%20ALL.png)
   
   ## Installation
   
