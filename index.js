@@ -89,7 +89,6 @@ const mainMenu = async () => {
   }
 };
 
-
 /** VIEW All Functions */
 const viewDepartments = async () => {
   console.log(`
@@ -123,6 +122,7 @@ const viewRoles = async () => {
   };
 };
 //! this one needs to be joined so that id shows the salary manager and department for each employee
+//-- Worked this out with help from Christian Guido.
 const viewEmployees = async () => {
   console.log(`
   **********************
@@ -169,12 +169,10 @@ const addDepartment = async () => {
     });
     console.log(`${answers.newDepartment} successfully added to the departments database.\n`);
     mainMenu();
-
   } catch (err) {
     handleError(err.message);
     mainMenu();
   }
-
 };
 
 const addRole = async () => {
@@ -191,14 +189,12 @@ const addRole = async () => {
         value: dept.department_id
       }
     });
-
     // tell answers to wait for prompt input
     let answers = await inquirer.prompt([
       {
         type: 'input',
         name: 'newRole',
         message: 'What is the name of your new role?'
-
       },
       {
         type: 'input',
@@ -272,7 +268,6 @@ const addEmployee = async () => {
         choices: managerChoices
       }
     ]);
-
     let addEmpRole = answers.newEmpRole;
     let managerID = answers.newEmpManager;
     let res = await db.query(`INSERT INTO employee SET ?`, {
@@ -288,7 +283,5 @@ const addEmployee = async () => {
     mainMenu();
   }
 };
-
-
 init();
 

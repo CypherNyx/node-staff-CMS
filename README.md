@@ -83,11 +83,14 @@ git clone https://github.com/CypherNyx/node-staff-CMS.git
 <br>
 
 ## Contributing
-  1. Fork it (<https://github.com/CypherNyx/node-staff-CMS/fork>)
+1. Fork it (<https://github.com/CypherNyx/node-staff-CMS/fork>)
 2. Create your feature branch (`git checkout -b suggest/new-feature`)
 3. Commit your changes (`git commit -m 'Add some new-feature'`)
 4. Push to the branch (`git push origin suggest/new-feature`)
 5. Create a new Pull Request
+
+### Credits
+I wrote the db Query to view all employees (index.js line: 131 - 143) and also created the variable to map over the department choices (index.js line: 184 and 186) with the assistance of Christian Guido.
 
   ## License
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
