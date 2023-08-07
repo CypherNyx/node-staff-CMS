@@ -185,10 +185,44 @@ const addRole = async () => {
   Add a NEW Role:
   `);
   try {
-    // tell answers to wait for prompt input
-    let answers = await inquirer.prompt({
-
+    // Query all depts in db, then save it to depList
+    const deptList = await db.query(`SELECT * FROM department`);
+    // OUTSIDE of the Prompt function, Map over deptList to return new values from the (map) arrow function to build a new array.Creating object literals {key: value} extracts just the name and id, and then returns a new easy to use array for the prompt choices. -- Worked this out with help from Christian Guido.
+    const deptChoices = deptList.map(dept => {
+      return {
+        name: dept.department_name,
+        value: dept.department_id
+      }
     });
+
+    // tell answers to wait for prompt input
+    let answers = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'newRole',
+        message: 'What is the name of your new role?'
+
+      },
+      {
+        type: 'input',
+        name: 'newRoleSalary',
+        message: 'What is the salary of your new role?'
+      },
+      {
+        type: 'list',
+        name: 'newRoleDept',
+        choices: deptChoices
+      }
+    ]);
+
+    let deptId = answers.newRoleDept;
+    let res = await db.query(`INSERT INTO roleType SET ?`, {
+      role_title: answers.newRole,
+      salary: answers.newRoleSalary,
+      department_id: deptId
+    });
+    console.log(`${answers.newRole} successfully added to the roles database.\n`);
+    mainMenu();
   } catch (err) {
     handleError(err.message);
     mainMenu();
